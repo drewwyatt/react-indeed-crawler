@@ -1,7 +1,7 @@
 import { ActionTypes } from '../actions';
 import { Search as SearchModels, IFetchStatus, FetchStatus } from '../models';
 
-interface ISearch {
+export interface ISearch {
     query: string;
     results: SearchModels.IResult[];
     status: IFetchStatus;
