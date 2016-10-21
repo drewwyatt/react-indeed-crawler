@@ -11,10 +11,12 @@ function handleSearch(): Promise<Search.IResponse> {
         .then(response => response.json());
 }
 
-function createResponseHandler(dispatch: Dispatch<IAppState>): (r: Search.IResponse) => void {
-    return function (response: Search.IResponse) {
-        if (response && response.results) {
-            dispatch(ActionCreators.Search.loadResults(response.results));
+function createResponseHandler(dispatch: Dispatch<IAppState>): (q: string) => (r: Search.IResponse) => void {
+    return function (query: string) {
+        return function (response: Search.IResponse) {
+            if (response && response.results) {
+                dispatch(ActionCreators.Search.loadResults(query, response.results));
+            }
         }
     }
 }
@@ -24,8 +26,9 @@ export default (store: Store<any>) => (next: Next) => (action: Action) => {
     const dispatch = store.dispatch;
     switch (action.type) {
         case ActionTypes.SearchActions.ActionType.PERFORM_SEARCH:
+            const q = (action as ActionTypes.SearchActions.PerformSearch).payload.query;
             handleSearch()
-                .then(createResponseHandler(dispatch));
+                .then(createResponseHandler(dispatch)(q));
         default:
             return;
     }

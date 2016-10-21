@@ -9,10 +9,10 @@ export namespace Search {
         };
     }
 
-    export function loadResults(results: SearchModel.IResult[]): SearchActions.LoadResults {
+    export function loadResults(query: string, results: SearchModel.IResult[]): SearchActions.LoadResults {
         return {
             type: SearchActions.ActionType.LOAD_RESULTS,
-            payload: { results }
+            payload: { query, results }
         };
     }
 }

@@ -16,6 +16,6 @@ export namespace SearchActions {
 
     export interface LoadResults extends BaseAction {
         type: 'SEARCH/LOAD_RESULTS',
-        payload: { results: Search.IResult[]; }
+        payload: { query: string; results: Search.IResult[]; }
     };
 }
