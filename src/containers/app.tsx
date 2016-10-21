@@ -1,3 +1,4 @@
+
 import * as React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
@@ -16,7 +17,7 @@ class App extends React.Component<AppProps, void> {
         return (
             <section style={styles}>
                 <p>This is the app component.</p>
-                <button onClick={() => performSearch('boom')}>Perform Search</button>
+                <button onClick={() => performSearch('scala')}>Perform Search</button>
             </section>
         );
     }
