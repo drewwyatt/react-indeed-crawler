@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { Button, Spinner } from 'react-mdl';
+import { Button, Spinner, List, ListItem, ListItemContent, ListItemAction } from 'react-mdl';
 
 import { IAppState, Search, IFetchStatus, FetchStatus } from '../models';
 import { ActionCreators } from '../actions';
@@ -20,7 +20,7 @@ class App extends React.Component<AppProps, void> {
         return (
             <section style={styles}>
                 {this._searchData()}
-                <button onClick={() => performSearch('scala')}>Perform Search</button>
+                <Button ripple raised primary onClick={() => performSearch('scala')}>Perform Search</Button>
             </section>
         );
     }
@@ -31,16 +31,19 @@ class App extends React.Component<AppProps, void> {
             return <p>Search for jobs.</p>;
         }
 
-        return <ul>{searches.map((s, i) => this._mapSearchToData(s, i))}</ul>;
+        return <List style={{width: '400px', margin: '0 auto'}}>{searches.map((s, i) => this._mapSearchToData(s, i))}</List>;
     }
 
     private _mapSearchToData(search: ISearch, idx: number): JSX.Element {
         return (
-            <li key={idx}>
-                <strong>{search.query}: &nbsp;&nbsp;</strong>
-                {search.results.length} results found
-                {this._fetchGlyph(search.status)}
-            </li>
+            <ListItem key={idx} threeLine>
+                <ListItemContent subtitle={`${search.results.length} results found`}>
+                    {search.query}
+                </ListItemContent>
+                <ListItemAction>
+                    {this._fetchGlyph(search.status)}
+                </ListItemAction>
+            </ListItem>
         );
     }
 
