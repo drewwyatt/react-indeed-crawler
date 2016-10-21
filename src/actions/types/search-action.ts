@@ -1,7 +1,7 @@
 import { BaseAction } from './base-action';
 import { Search } from '../../models';
 
-export type SearchAction = SearchActions.PerformSearch;
+export type SearchAction = SearchActions.PerformSearch | SearchActions.LoadResults;
 
 export namespace SearchActions {
     export const ActionType = {

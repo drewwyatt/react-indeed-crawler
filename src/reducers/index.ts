@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
+import searches from './search-results';
 
-export default function(state: any, action: any): string {
-    return 'NO_REDUCERS_YET';
-}
+export default combineReducers({
+    searches
+});
